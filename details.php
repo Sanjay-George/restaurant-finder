@@ -177,7 +177,7 @@ if (!$_GET){
     <div class='row jumbo'>
         <div class='col s12 parallax-container'>
             <div class='col s12 parallax'>
-                <img id='rest-img' src="images/rest1.jpg">
+<!--                <img id='rest-img' src="images/rest1.jpg">-->
                 <img id='rest-img' src="<?php echo $row['r_pic'];?>">
 
 
@@ -185,7 +185,7 @@ if (!$_GET){
                     <div class='col l8 info-set-1'>
                         <h2><?php echo $row['r_name']; ?></h2>
                         <h5 class='valign-wrapper'><i class='material-icons'>location_on</i> <?php echo $row['r_add']; ?></h5>
-                        <h5 class='valign-wrapper'><i class='material-icons'>query_builder</i> <span><?php echo $row['r_time']; ?></span><span>&nbsp;-&nbsp; </span><span>closing time</span></h5>
+                        <h5 class='valign-wrapper'><i class='material-icons'>query_builder</i> <span><?php echo $row['r_time']; ?></span><span>&nbsp;-&nbsp; </span><span><?php echo $row['r_close']; ?></span></h5>
                         <h5 class='valign-wrapper'><i class='material-icons'>stay_current_portrait</i><?php echo $row['r_contact']; ?></h5>
                     </div>
                     <div class='col l4 info-set-2'>
@@ -211,7 +211,7 @@ if (!$_GET){
                 <!-- *********** -->
                 <!-- MENU IMAGES -->
                 <!-- *********** -->
-                <img src="images/header2.jpg">
+                <img src="<?php echo $row['r_menu'];?>">
             </div>
         </div>
       
@@ -227,8 +227,7 @@ if (!$_GET){
                 
                 <div class='col s12 m12 l10 offset-l1'>
                 <form method="post" name='new-review' id='new-review' class="col s12" novalidate>
-                <!-- STARS SHIT HERE -->
-                <!-- READ CAREFULLY : WHEN CLICKING ON A STAR, THE CORRESPONDING VALUE IS STORED IN THE HIDDEN INPUT ELEMENT WITH NAME RATING...SO WHEN FORM IS SUBMITTED, $_POST['rating'] WILL GIVE THE RATING -->
+                
                 <div class='row'>
                   <div class='col s12'>
                         <input name='rating' id='rating' type="hidden" value='1'>
