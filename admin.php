@@ -37,8 +37,8 @@ try{
 	$sql->execute(array(':r_name'=>$name, ':r_type'=>$type, ':r_add'=>$address, ':r_cuisine'=>$cuisine, ':r_cost'=>$cost, ':r_contact'=>$contact, ':r_time'=>$open, ':r_close'=>$close, ':r_pic'=>$pic, ':r_menu'=>$menu));
 }*/
 }catch(PDOException $e){
-									echo $e->getMessage();
-									}
+echo $e->getMessage();
+}
 
 
 
@@ -54,128 +54,105 @@ try{
     </head>
 
     <body>
-       
-
-       <nav class='z-depth-3 col s12'>
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo left hide-on-small-only">Food Finder </a>
-                
-                <ul id="nav-mobile" class="right">
-                    <li class='waves-effect waves-light'><a name='search-btn' class="waves-effect waves-light btn z-depth-2 red">Logout</a></li>
-                </ul>
-            </div>
-        </nav>
-     
-       
-        <main>
-         
-            <div class="container admin">
-                 <div class="row">
-                    <div class="col s12">
-                      <ul class="tabs">
+    <nav class='z-depth-3 col s12'>
+        <div class="nav-wrapper"> <a href="#" class="brand-logo left hide-on-small-only">Food Finder </a>
+            <ul id="nav-mobile" class="right">
+                <li class='waves-effect waves-light'><a name='search-btn' class="waves-effect waves-light btn z-depth-2 red">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div class="container admin">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
                         <li class="tab col s3 z-depth-1 hoverable"><a href="#add">add restaurants</a></li>
-                        <li class="tab col s3 hoverable"><a  href="#reviews"  class="active">verify reviews</a></li>
+                        <li class="tab col s3 hoverable"><a href="#reviews" class="active">verify reviews</a></li>
                         <li class="tab col s3 z-depth-1 hoverable"><a href="#suggestions">suggestions</a></li>
                         <li class="tab col s3 z-depth-1 hoverable"><a href="#edit">edit restaurants</a></li>
                         <li class="tab col s3 hoverable"><a href="#delete">delete restaurants</a></li>
-                      </ul>
-                    </div>
-                    
-                    <!--  ADD RESTAURANTS -->
-                    <div id="add" class="col s12">
-												<div class="col s12 m12 l10 offset-l1">
-														<div class="row">
-																<form action="insert.php" name='add-rst' method='POST' id='add-rst' class="col s12">
-																<div class="row">
-																		<div class="input-field col s12">
-																			<input id="name" type="text" name="name" class="validate">
-																			<label for="name">Name of restaurant</label>
-																		</div>
-																</div>
-																<div class="row">
-																		<div class="input-field col s12">
-																			<input id="address" type="text" name="address">
-																			<label for="address">Address</label>
-																		</div>
-																</div>
-																<div class="row">
-																	 <div class='input-field col s4'>
-																				<select id='type' name='type' class='material-select'>
-																						<option default>Choose a food diet</option>
-
-																						<option value="Veg">Veg</option>
-																						<option value="Non-Veg">Non-Veg</option>
-																				</select>
-																		</div>
-																		<div class="input-field col s4">
-																			<select id='cuisine' name='cuisine' class='material-select'>
-																						<option default>Choose a cuisine</option>
-																						<?php 
-																							$sql= $db->query('SELECT DISTINCT`r_cuisine` FROM `restaurant` '); 
-																							while($row=$sql->fetch()){
-																								echo '<option value="'.$row['r_cuisine'].'">'.$row['r_cuisine'].'</option>';
-																							}
-																						?>
-																				</select>
-																		</div>
-																		<div class="input-field col s4">
-																			<input type='text' id='cost' name="cost">
-																			<label for="cost">Cost</label>
-																						
-																		</div>
-																</div>
-																<div class="row">
-																	 <div class='input-field col s4'>
-																				<input type='text' id='contact' name="contact">
-																				<label for="contact">Contact Number</label>
-																		</div>
-																		<div class="input-field col s4">
-																			<input id="open-time" name="open-time" type="time">
-																		</div>
-																		<div class="input-field col s4">
-																			<input id="close-time" name="close-time" type="time">
-																		</div>
-																</div>
-																<div class='row'>
-																		<div class='file-field input-field col s6'>
-																			 <div class='btn black-btn'>
-																					 <span>Photo</span>
-																					 <input type="file" name="pic">
-																			 </div>
-																				<!-- <div class='file-path-wrapper'>
+                    </ul>
+                </div>
+                <!--  ADD RESTAURANTS -->
+                <div id="add" class="col s12">
+                    <div class="col s12 m12 l10 offset-l1">
+                        <div class="row">
+                            <form action="insert.php" name='add-rst' method='POST' id='add-rst' class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="name" type="text" name="name" class="validate">
+                                        <label for="name">Name of restaurant</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="address" type="text" name="address">
+                                        <label for="address">Address</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class='input-field col s4'>
+                                        <select id='type' name='type' class='material-select'>
+                                            <option default>Choose a food diet</option>
+                                            <option value="Veg">Veg</option>
+                                            <option value="Non-Veg">Non-Veg</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-field col s4">
+                                        <select id='cuisine' name='cuisine' class='material-select'>
+                                            <option default>Choose a cuisine</option>
+                                            <?php 
+                                                $sql= $db->query('SELECT DISTINCT`r_cuisine` FROM `restaurant` '); 
+                                                while($row=$sql->fetch()){
+                                                    echo '<option value="'.$row['r_cuisine'].'">'.$row['r_cuisine'].'</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="input-field col s4">
+                                        <input type='text' id='cost' name="cost">
+                                        <label for="cost">Cost</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class='input-field col s4'>
+                                        <input type='text' id='contact' name="contact">
+                                        <label for="contact">Contact Number</label>
+                                    </div>
+                                    <div class="input-field col s4">
+                                        <input id="open-time" name="open-time" type="time"> </div>
+                                    <div class="input-field col s4">
+                                        <input id="close-time" name="close-time" type="time"> </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='file-field input-field col s6'>
+                                        <div class='btn black-btn'> <span>Photo</span>
+                                            <input type="file" name="pic"> </div>
+                                        <!-- <div class='file-path-wrapper'>
 																					 <input class='file-path-validate' type="text" name="pic">
-																			 </div> -->
-
-																		</div>
-																		<div class='file-field input-field col s6'>
-																			 <div class='btn black-btn'>
-																					 <span>Menu</span>
-																					 <input type="file" name="menu">
-																			 </div>
-																				<!-- <div class='file-path-wrapper'>
+																			 </div> --></div>
+                                    <div class='file-field input-field col s6'>
+                                        <div class='btn black-btn'> <span>Menu</span>
+                                            <input type="file" name="menu"> </div>
+                                        <!-- <div class='file-path-wrapper'>
 																					 <input class='file-path-validate' type="text" name="Filename">
-																			 </div>  -->
-
-																		</div>
-																</div>
-																
-																<div class='col s12 l12 center'><button type='submit' name='submit' value="submit" class="waves-effect waves-light btn z-depth-2 black-btn">Add Restaurant</button></div>
-
-				<!--                        <div class='col s12 l12 center'><p class='form-error center'><?php echo $error; ?></p></div>-->
-																</form>
-                            </div>    
+																			 </div>  --></div>
+                                </div>
+                                <div class='col s12 l12 center'>
+                                    <button type='submit' name='submit' value="submit" class="waves-effect waves-light btn z-depth-2 black-btn">Add Restaurant</button>
+                                </div>
+                                <!--                        <div class='col s12 l12 center'><p class='form-error center'><?php echo $error; ?></p></div>-->
+                            </form>
                         </div>
                     </div>
-                    
-                    <!-- VERIFY REVIEWS -->
-                    <div id="reviews" class="col s12">
-                     <div class='col s12 l10 offset-l1'>
-                         <h5> REVIEWS </h5>
-                     
-                         <form name='review-accept' method="post" id='review-accept'>
-                           
-                             <!-- repeat start here -->
-                             <?php 
+                </div>
+                <!-- VERIFY REVIEWS -->
+                <div id="reviews" class="col s12">
+                    <div class='col s12 l10 offset-l1'>
+                        <h5> REVIEWS </h5>
+                        <form name='review-accept' method="post" id='review-accept'>
+                            <!-- repeat start here -->
+                            <?php 
 								try {
 										$flag = 0;
 										$sql = $db->query('SELECT * FROM `user`, `admin` WHERE `app`=0 AND `user`.`u_id`= `admin`.`a_uid`');
@@ -199,74 +176,71 @@ try{
 																
 
 									?>
-                             <!-- repeat till here -->
-                             
-                             
-                            <div class='col l12 center update-btn'><button name='submit' class="waves-effect waves-light btn z-depth-2 red">Accept Reviews</button></div>  
-												</form>
-													<?php 
-														try{
-															if(isset($_POST['submit'])){
-																$sql = $db->query('SELECT * FROM  `admin` WHERE `app`=0 ');
-																while($row = $sql->fetch()){
-																	$cb = $row['ar_id'];
-																	echo $cb;
-																	if(isset($_POST[$cb])){
-																		
-																		if(isset($_POST[$cb]) && $_POST[$cb]==1){
-																			echo $cb;
-																			$sql1 = $db->query('SELECT * FROM `admin` WHERE `ar_id`='.$cb.'');
-																			$restid = $row['a_restid'];
-																			$a_rev = $row['a_rev'];
-																			$uid = $row['a_uid'];
-																			
-																			$sql2 = $db->prepare('INSERT INTO `review` (rest_id, review, u_id) VALUES (:rest_id, :review, :u_id) ');
-																			$sql2->execute(array(':review'=>$a_rev, ':rest_id'=>$restid, ':u_id'=>$uid));
+                                <!-- repeat till here -->
+                                <div class='col l12 center update-btn'>
+                                    <button name='submit' class="waves-effect waves-light btn z-depth-2 red">Accept Reviews</button>
+                                </div>
+                        </form>
+                        <?php 
+                            try{
+                                if(isset($_POST['submit'])){
+                                    $sql = $db->query('SELECT * FROM  `admin` WHERE `app`=0 ');
+                                    while($row = $sql->fetch()){
+                                        $cb = $row['ar_id'];
+                                        echo $cb;
+                                        if(isset($_POST[$cb])){
 
-																			$sql3 = $db->query('DELETE FROM `admin` WHERE `ar_id`='.$cb.'');
-																		}
-																	}
-																	$_POST[$cb]=0; 
-																}
-															}
-														}catch(PDOException $e){
-																echo 'connection failed: '.$e->getMessage();
-															}
-													?>
-										 </div>
-										</div>
-                    
-                    <!-- SUGGESTIONS -->
-                    <div id="suggestions" class="col s12">
-												<div class='col s12 l10 offset-l1'>
-												 <h5> SUGGESTIONS </h5>
-										 
-												 <form name='suggestion-accept' method="post" id='suggestion-accept'>
-													 
-														 <!-- repeat start here -->
-														 <?php 
-														 try{
-															$flag= 0;
-															$sql = $db->query('SELECT * FROM `suggestion`,`user` WHERE `user`.`u_id`=`suggestion`.`u_id`');
-															while ($row= $sql->fetch()) {
-																$flag = 1;
-																echo "<div class='col s12 l12 card-panel z-depth-1 hoverable suggestion-card'>";
-																	echo "<div class='col l12'>";
-																		echo "<input type='checkbox' name=".$row['s_id']." id=".$row['s_id']." value=1 >";
-																		echo "<label for=".$row['s_id']."><span class='review-name'>".$row['u_name']."</span></label>        ";
-																		echo "<div class='review-content'>".$row['suggestion']."</div>";
-																	echo "</div>";
-																echo "</div>";
-															}
-														 if($flag==0){
-															echo "<h5>No new suggestions</h5>";
-																}
-														 }catch(PDOException $e){
-																echo 'connection failed: '.$e->getMessage();
-															}
-														 
-														 ?>
-                             <!-- repeat start here 
+                                            if(isset($_POST[$cb]) && $_POST[$cb]==1){
+                                                echo $cb;
+                                                $sql1 = $db->query('SELECT * FROM `admin` WHERE `ar_id`='.$cb.'');
+                                                $restid = $row['a_restid'];
+                                                $a_rev = $row['a_rev'];
+                                                $uid = $row['a_uid'];
+
+                                                $sql2 = $db->prepare('INSERT INTO `review` (rest_id, review, u_id) VALUES (:rest_id, :review, :u_id) ');
+                                                $sql2->execute(array(':review'=>$a_rev, ':rest_id'=>$restid, ':u_id'=>$uid));
+
+                                                $sql3 = $db->query('DELETE FROM `admin` WHERE `ar_id`='.$cb.'');
+                                            }
+                                        }
+                                        $_POST[$cb]=0; 
+                                    }
+                                }
+                            }catch(PDOException $e){
+                                    echo 'connection failed: '.$e->getMessage();
+                                }
+                        ?>
+                    </div>
+                </div>
+                <!-- SUGGESTIONS -->
+                <div id="suggestions" class="col s12">
+                    <div class='col s12 l10 offset-l1'>
+                        <h5> SUGGESTIONS </h5>
+                        <form name='suggestion-accept' method="post" id='suggestion-accept'>
+                            <!-- repeat start here -->
+                            <?php 
+                                 try{
+                                    $flag= 0;
+                                    $sql = $db->query('SELECT * FROM `suggestion`,`user` WHERE `user`.`u_id`=`suggestion`.`u_id`');
+                                    while ($row= $sql->fetch()) {
+                                        $flag = 1;
+                                        echo "<div class='col s12 l12 card-panel z-depth-1 hoverable suggestion-card'>";
+                                            echo "<div class='col l12'>";
+                                                echo "<input type='checkbox' name=".$row['s_id']." id=".$row['s_id']." value=1 >";
+                                                echo "<label for=".$row['s_id']."><span class='review-name'>".$row['u_name']."</span></label>        ";
+                                                echo "<div class='review-content'>".$row['suggestion']."</div>";
+                                            echo "</div>";
+                                        echo "</div>";
+                                    }
+                                 if($flag==0){
+                                    echo "<h5>No new suggestions</h5>";
+                                        }
+                                 }catch(PDOException $e){
+                                        echo 'connection failed: '.$e->getMessage();
+                                    }
+
+                                 ?>
+                                <!-- repeat start here 
                              <div class='col s12 l12 card-panel z-depth-1 hoverable suggestion-card'>
                                  <div class='col l12'>
                                      <input type='checkbox' name='give-id-of-the-suggester-here' id='give-id-of-the-suggester-here'>
@@ -275,86 +249,83 @@ try{
                                  </div> 
                              </div> 
                              <!-- repeat till here -->
-                             
-                             
-                            <div class='col l12 center update-btn'><button name='submit' class="waves-effect waves-light btn z-depth-2 red">CLEAR SUGGESTIONS</button></div>  
-														 
-												</form>
-												<?php 
-														try{
-															if(isset($_POST['submit'])){
-																$sql = $db->query('SELECT * FROM  `suggestion`');
-																while($row = $sql->fetch()){
-																	$cb = $row['s_id'];
+                                <div class='col l12 center update-btn'>
+                                    <button name='submit' class="waves-effect waves-light btn z-depth-2 red">CLEAR SUGGESTIONS</button>
+                                </div>
+                        </form>
+                        <?php 
+                            try{
+                                if(isset($_POST['submit'])){
+                                    $sql = $db->query('SELECT * FROM  `suggestion`');
+                                    while($row = $sql->fetch()){
+                                        $cb = $row['s_id'];
 
-																	if(isset($_POST[$cb])){
-																	
-																		if(isset($_POST[$cb]) && $_POST[$cb]==1){
-																			
-																			$sql1 = $db->query('SELECT * FROM `suggestion` WHERE `s_id`='.$cb.'');
-																			$sql3 = $db->query('DELETE FROM `suggestion` WHERE `s_id`='.$cb.'');
-																		}
-																	}
-																	$_POST[$cb]=0; 
-																}
-															}
-														}catch(PDOException $e){
-																echo 'connection failed: '.$e->getMessage();
-															}
-													?>
-										 </div>
-										</div>
-                    
-                    
-                    <div id="edit" class="col s12">
-					
-                        <div class="col s12 m12 l10 offset-l1">
-                            <div class="row">
-                                <form action="" name='edit-rst' method='post' id='add-rst' class="col s12">
-								<div class="input-field col s4">
-																			<select id='name' name='name' class='material-select'>
-																						<option default>Choose a restaurant</option>
-																						<?php 
-																							$sql= $db->query('SELECT `r_name` FROM `restaurant` '); 
-																							while($row=$sql->fetch()){
-																								echo '<option value="'.$row['r_name'].'">'.$row['r_name'].'</option>';
-																							}
-																						?>
-																				</select>
-																		</div>
+                                        if(isset($_POST[$cb])){
+
+                                            if(isset($_POST[$cb]) && $_POST[$cb]==1){
+
+                                                $sql1 = $db->query('SELECT * FROM `suggestion` WHERE `s_id`='.$cb.'');
+                                                $sql3 = $db->query('DELETE FROM `suggestion` WHERE `s_id`='.$cb.'');
+                                            }
+                                        }
+                                        $_POST[$cb]=0; 
+                                    }
+                                }
+                            }catch(PDOException $e){
+                                    echo 'connection failed: '.$e->getMessage();
+                                }
+                        ?>
+                    </div>
+                </div>
+                <div id="edit" class="col s12">
+                    <div class="col s12 m12 l10 offset-l1">
+                        <div class="row">
+                            <form action="" name='edit-rst' method='post' id='add-rst' class="col s12">
+                                <div class="input-field col s4">
+                                    <select id='name' name='name' class='material-select'>
+                                        <option default>Choose a restaurant</option>
+                                        <?php 
+                                            $sql= $db->query('SELECT `r_name` FROM `restaurant` '); 
+                                            while($row=$sql->fetch()){
+                                                echo '<option value="'.$row['r_name'].'">'.$row['r_name'].'</option>';
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
                                 <!--<div class="row">
                                     <div class="input-field col s12">
                                       <input id="name" type="text" name="name" class="validate">
                                       <label for="name">Enter name of restaurant</label>
                                     </div>
-                                </div>-->
-							</div>
-						</div>
-						<div class='col s12 l12 center'><button name='edit'  class="waves-effect waves-light btn z-depth-2 black-btn">Submit</button></div>
-						</form>
-						
-					</div>
-					
-                    <div id="delete" class="col s12">
-					<div class="col s12 m12 l10 offset-l1">
-                            <div class="row">
-                                <form action="delete.php" name='edit-rst' method='post' id='add-rst' class="col s12">
+                                </div>--></div>
+                    </div>
+                    <div class='col s12 l12 center'>
+                        <button name='edit' class="waves-effect waves-light btn z-depth-2 black-btn">Submit</button>
+                    </div>
+                    </form>
+                </div>
+                <div id="delete" class="col s12">
+                    <div class="col s12 m12 l10 offset-l1">
+                        <div class="row">
+                            <form action="delete.php" name='edit-rst' method='post' id='add-rst' class="col s12">
                                 <div class="input-field col s4">
-																			<select id='name' name='name' class='material-select'>
-																						<option default>Choose a restaurant to delete</option>
-																						<?php 
-																							$sql= $db->query('SELECT `r_name` FROM `restaurant` '); 
-																							while($row=$sql->fetch()){
-																								echo '<option value="'.$row['r_name'].'">'.$row['r_name'].'</option>';
-																							}
-																						?>
-																				</select>
-																		</div>
-							</div>
-						</div>
-						<div class='col s12 l12 center'><button name='delete' class="waves-effect waves-light btn z-depth-2 black-btn">Submit</button></div>
-						</form>
-						<?php    
+                                    <select id='name' name='name' class='material-select'>
+                                        <option default>Choose a restaurant to delete</option>
+                                        <?php 
+                                            $sql= $db->query('SELECT `r_name` FROM `restaurant` '); 
+                                                        while($row=$sql->fetch()){
+                                                            echo '<option value="'.$row['r_name'].'">'.$row['r_name'].'</option>';
+                                                        }
+                                                ?>
+                                    </select>
+                                </div>
+                        </div>
+                    </div>
+                    <div class='col s12 l12 center'>
+                        <button name='delete' class="waves-effect waves-light btn z-depth-2 black-btn">Submit</button>
+                    </div>
+                    </form>
+                    <?php    
 						if(isset($_POST['delete']))
 						{
 						echo '<script> var r= confirm("Are you sure you want to delete this restaurant?");
@@ -363,15 +334,10 @@ try{
 										</script>';
 						}
 										?>
-					</div>
-                    
-                    
                 </div>
             </div>
-           
-           
-            
-        </main>
+        </div>
+    </main>
   
       
      

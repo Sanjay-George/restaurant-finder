@@ -185,11 +185,13 @@ if (!$_GET){
                     <div class='col l8 info-set-1'>
                         <h2><?php echo $row['r_name']; ?></h2>
                         <h5 class='valign-wrapper'><i class='material-icons'>location_on</i> <?php echo $row['r_add']; ?></h5>
+                        <h5 class='valign-wrapper'><i class='material-icons'>query_builder</i> <span><?php echo $row['r_time']; ?></span><span>&nbsp;-&nbsp; </span><span>closing time</span></h5>
                         <h5 class='valign-wrapper'><i class='material-icons'>stay_current_portrait</i><?php echo $row['r_contact']; ?></h5>
                     </div>
                     <div class='col l4 info-set-2'>
+                        <h5 class='valign-wrapper center'> <span class='rating-disp z-depth-4 valign-wrapper'><span><?php echo $row['r_rat_avg']; ?> </span><span><i class='material-icons center'>&nbsp;star</i></span></span></h5>
                         <h5><i class='material-icons'>&#8377; &nbsp;</i><span><?php echo $row['r_cost']; ?></span></h5>
-                        <h5 class='valign-wrapper'><i class='material-icons'>query_builder</i> <span><?php echo $row['r_time']; ?></span><span>&nbsp;-&nbsp; </span><span>closing time</span></h5>
+                        
                         <h5 class='valign-wrapper'><i class='material-icons'>done</i><?php echo $row['r_cuisine']; ?></h5>
                         <h5 class='valign-wrapper'><i class='material-icons'>done</i> <?php echo $row['r_type']; ?></h5>
                         

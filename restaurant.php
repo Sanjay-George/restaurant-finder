@@ -256,7 +256,15 @@ require('login.php');
 					?>
                         
            
-                   </div>
+                    </div>
+                    <div class='col m12 pagination-row center'>
+                        <ul class="pagination">
+                            <li class="left-arrow waves-effect disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+<!--                            <li class="page-number active waves-effect"><a href="#!">1</a></li>-->
+<!--                            <li class="page-number waves-effect"><a href="#!">2</a></li>-->
+                            <li class="right-arrow waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                          </ul>
+                    </div>
                 </div>
             </div>
         </main>
@@ -265,6 +273,51 @@ require('login.php');
         <script src="js/jquery.waypoints.min.js"></script>
         <script src="js/typed.js"></script>
         <script>
+            
+            // WHEN DOC READY
+            $(document).ready(function () {
+                // FOR SELECTING TABS
+                $('ul.tabs').tabs();
+                $('.modal-trigger').leanModal();
+                
+                // FOR PAGINATION
+                var cardNum = $('.restaurants-cards .card-holder').length;
+                var pNum = Math.ceil(cardNum / 9);
+                for (var i=0; i<pNum; i++){
+                    $( "<li class='page-number waves-effect'><a href='#!'>"+(i+1)+"</a></li>" ).insertBefore( ".pagination .right-arrow" );
+                }
+                $('.pagination li:nth-child(2)').addClass('active');
+                if (pNum == 1)
+                    $('.right-arrow').addClass('disabled');
+                // if pnum >1 hide after the first 9
+//                if (pNum > 1){
+//                    for(i=10;i<=cardNum;i++){
+//                        $(".restaurants-cards .card-holder:nth-child("+i+")").hide();
+//                    }
+//                }
+                
+            
+                
+            });
+            
+            // FOR WORKING OF PAGINATION
+            // left arrow click
+            // right arrow click
+//            // page-number click
+//            $('.page-number').click(function(){
+//                // pagenumber*9-8 till page number * 9
+//                var pageNum = $(this).text();
+//                alert('hi');
+//                for(i=10;i<=cardNum;i++){
+//                        $(".restaurants-cards .card-holder:nth-child("+i+")").hide();
+//                }
+//                
+//            });
+            $('.left-arrow').click(function(){});
+            $('.right-arrow').click(function(){});
+            
+            
+            
             
             // LOGIN REQUEST AJAX
             $('#login button').click(function (e) {
@@ -312,12 +365,7 @@ require('login.php');
                 });
             });
 
-            // WHEN DOC READY
-            $(document).ready(function () {
-                // FOR SELECTING TABS
-                $('ul.tabs').tabs();
-                $('.modal-trigger').leanModal();
-            });
+            
             // TYPING EFFECT
             $(function () {
                 $(".autotype").typed({

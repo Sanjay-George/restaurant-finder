@@ -98,6 +98,17 @@ nav .btn{
 .text h5{
     font-size : 90%;
 }
+.rating-disp{
+    font-size : 140%;
+    font-weight: 300;
+    border : 1px solid #fff;
+    border-radius: 3px;
+    padding: 5px 15px !important;
+}
+.rating-disp .material-icons{
+    font-size : 85%;
+    margin : 0;
+}
 .text i{
     margin-right:10px;
 }

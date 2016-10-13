@@ -96,4 +96,8 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 
     color: #e3301e;
 }
+
+.pagination li.active{
+    background-color: #ee301e;
+}
 /*---------------------------------------------------------------*/
