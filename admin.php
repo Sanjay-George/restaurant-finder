@@ -1,4 +1,5 @@
 <?php include('config.php'); 
+include('login.php');
 //error_reporting(0);
 session_start();
 //$_SESSION["name"] = $_POST['name'];
@@ -350,17 +351,22 @@ try{
 																						?>
 																				</select>
 																		</div>
+								<div class='col s12 l12 center'><button name='delete' class="waves-effect waves-light btn z-depth-2 black-btn">Submit</button></div>
+						</form>
 							</div>
 						</div>
-						<div class='col s12 l12 center'><button name='delete' class="waves-effect waves-light btn z-depth-2 black-btn">Submit</button></div>
-						</form>
+						</div>
+						
+						
+						
 						<?php    
+						$_SESSION['r_name']=$_POST['name'];
 						if(isset($_POST['delete']))
 						{
-						echo '<script> var r= confirm("Are you sure you want to delete this restaurant?");
+					/*	echo '<script> var r= confirm("Are you sure you want to delete this restaurant?");
 									if(r){
 										window.location.href="delete.php";}
-										</script>';
+										</script>'; */
 						}
 										?>
 					</div>
