@@ -1,25 +1,28 @@
 <?php include('config.php'); 
-//error_reporting(0);
-session_start();
-//$_SESSION["name"] = $_POST['name'];
-   
+
+session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
+   $name1= $_SESSION['name'];
+  // echo $name1;
 try{
+		//$name1=$_SESSION['name'];
+		$name=$_POST['rest'];
+	$address=$_POST['address'];
+	$cost=$_POST['cost'];
+	$type=$_POST['type'];
+	$cuisine=$_POST['cuisine'];
+	$open=$_POST['open-time'];
+	$close=$_POST['close-time'];
+	$contact=$_POST['contact'];
+	$pic=$_POST['pic'];
+	$target= "images/";
+	$menu=$_POST['menu'];
+	$menu= $target.$menu;
+	$pic= $target.$pic;
 	
-	if(isset($_POST['edit']))
-	{
-		
-		$_SESSION['name'] = $_POST['name'];
-		//echo $_SESSION['name'];
-		//echo "hi";
-		header("Location: edit.php");
-	}
-	
-	
-	
-/*if(isset($_POST['submit']))
+if(isset($_POST['submit']))
 {
 	
-	$name=$_POST['name'];
+	$name=$_POST['rest'];
 	$address=$_POST['address'];
 	$cost=$_POST['cost'];
 	$type=$_POST['type'];
@@ -35,7 +38,29 @@ try{
 	//echo "hi";
 	$sql=$db->prepare("INSERT INTO restaurant (r_name,r_type,r_add,r_cuisine,r_cost,r_contact,r_time,r_close,r_pic,r_menu) VALUES (:r_name, :r_type, :r_add, :r_cuisine,:r_cost, :r_contact, :r_time, :r_close, :r_pic, :r_menu)");
 	$sql->execute(array(':r_name'=>$name, ':r_type'=>$type, ':r_add'=>$address, ':r_cuisine'=>$cuisine, ':r_cost'=>$cost, ':r_contact'=>$contact, ':r_time'=>$open, ':r_close'=>$close, ':r_pic'=>$pic, ':r_menu'=>$menu));
-}*/
+	header("Location: admin.php");
+}
+
+if(isset($_POST['update']))
+{
+	/*UPDATE `access_users`   
+   SET `contact_first_name` = :firstname,
+       `contact_surname` = :surname,
+       `contact_email` = :email,
+       `telephone` = :telephone 
+ WHERE `user_id` = :user_id*/
+    $name1=$_SESSION['name'];
+	//echo "hi";
+	echo $name1;
+	$sql = $db->prepare("UPDATE `restaurant` SET `r_name` = :r_name, `r_type` = :r_type, `r_add` = :r_add, `r_cuisine` = :r_cuisine, `r_cost` = :r_cost, `r_contact` = :r_contact, `r_time` = :r_time, `r_close` = :r_close, `r_pic`= :r_pic, `r_menu`= :r_menu WHERE `r_name`='".$name1."'"); 
+	$sql->execute(array(':r_name'=>$name, ':r_type'=>$type, ':r_add'=>$address, ':r_cuisine'=>$cuisine, ':r_cost'=>$cost, ':r_contact'=>$contact, ':r_time'=>$open, ':r_close'=>$close,  ':r_pic'=>$pic, ':r_menu'=>$menu));
+	unset($_SESSION['name']);
+	header("Location: admin.php");
+}
+
+
+
+
 }catch(PDOException $e){
 									echo $e->getMessage();
 									}
@@ -74,14 +99,13 @@ try{
                     <div class="col s12">
                       <ul class="tabs">
                         <li class="tab col s3 z-depth-1 hoverable"><a href="#add">add restaurants</a></li>
-                        <li class="tab col s3 hoverable"><a  href="#reviews"  class="active">verify reviews</a></li>
+                        <li class="tab col s3 hoverable"><a  href="#reviews"  >verify reviews</a></li>
                         <li class="tab col s3 z-depth-1 hoverable"><a href="#suggestions">suggestions</a></li>
-                        <li class="tab col s3 z-depth-1 hoverable"><a href="#edit">edit restaurants</a></li>
+                        <li class="tab col s3 z-depth-1 hoverable" ><a href="#edit" class="active">edit restaurants</a></li>
                         <li class="tab col s3 hoverable"><a href="#delete">delete restaurants</a></li>
                       </ul>
                     </div>
                     
-                    <!--  ADD RESTAURANTS -->
                     <div id="add" class="col s12">
 												<div class="col s12 m12 l10 offset-l1">
 														<div class="row">
@@ -304,38 +328,105 @@ try{
 													?>
 										 </div>
 										</div>
-                    
-                    
-                    <div id="edit" class="col s12">
-					
-                        <div class="col s12 m12 l10 offset-l1">
+
+
+<div id="edit" class="col s12">
+<?php //if(isset($_POST['edit']))
+						//{
+							$name1=$_SESSION['name'];
+							$sql = $db->query('SELECT * FROM `restaurant` WHERE `r_name`="'.$name1.'"');
+							$row=$sql->fetch();
+						?>
+						<div class="col s12 m12 l10 offset-l1">
                             <div class="row">
-                                <form action="" name='edit-rst' method='post' id='add-rst' class="col s12">
-								<div class="input-field col s4">
-																			<select id='name' name='name' class='material-select'>
-																						<option default>Choose a restaurant</option>
-																						<?php 
-																							$sql= $db->query('SELECT `r_name` FROM `restaurant` '); 
-																							while($row=$sql->fetch()){
-																								echo '<option value="'.$row['r_name'].'">'.$row['r_name'].'</option>';
-																							}
-																						?>
-																				</select>
-																		</div>
-                                <!--<div class="row">
+                                <form action="" name='add-rst' method='post' id='add-rst' class="col s12">
+                                <div class="row">
                                     <div class="input-field col s12">
-                                      <input id="name" type="text" name="name" class="validate">
-                                      <label for="name">Enter name of restaurant</label>
+                                      <input id="name" type="text" name="rest" class="validate" value="<?php echo $row['r_name']; ?>"></input>
+                                      <label for="name"></label>
                                     </div>
-                                </div>-->
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+						<input id="address" type="text" name="address" value="<?php echo $row['r_add']; ?>"></input>
+                                      <label for="address"></label>
+                                    </div>
+                                </div>
+                                <div class="row">
+								<div class='input-field col s4'>
+                                        <input type='text' id='cost' name="cost" value="<?php echo $row['r_cost'];?>"></input>
+                                        <label for="contact">Cost</label>
+                                    </div>
+                                   <div class='input-field col s4'>
+                                        <select id='type' name='type' class='material-select'>
+                                            <option default><?php echo $row['r_type'];?></option>
+                                            <option value="veg">Veg</option>
+                                            <option value="non-veg">Non-veg</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-field col s4">
+                                      <select id='cuisine' name='cuisine' class='material-select'>
+						<option default><?php echo $row['r_cuisine']; ?></option>
+											<?php 
+														$sql= $db->query('SELECT DISTINCT`r_cuisine` FROM `restaurant` '); 
+														while($row=$sql->fetch()){
+															echo '<option value="'.$row['r_cuisine'].'">'.$row['r_cuisine'].'</option>';
+														}
+													?>
+                                            <!--<option value="mexican">Mexican</option>
+                                            <option value="italian">Italian</option>
+											<option value="chinese">Chinese</option>
+											<option value="lebanese">Lebanese</option>
+											<option value="mediterranean">Mediterranean</option>
+											<option value="continental">Continental</option>-->
+											
+                                        </select>
+                                    </div>
+                                </div>
+								<?php 							$sql = $db->query('SELECT * FROM `restaurant` WHERE `r_name`="'.$name1.'"');
+																$row=$sql->fetch();?>
+                                <div class="row">
+                                   <div class='input-field col s4'>
+                                        <input type='text' id='contact' name="contact" value="<?php echo $row['r_contact'];?>" ></input>
+                                        <label for="contact">Contact Number</label>
+                                    </div>
+									
+                                    <div class="input-field col s4">
+                                      <input id="open-time" name="open-time" type="time" value="<?php echo $row['r_time'];?>" ></input>
+                                    </div>
+                                    <div class="input-field col s4">
+						<input id="close-time" name="close-time" type="time" value="<?php echo $row['r_close']; ?>" ></input>
+                                    </div>
+                                </div>
+								
+                                <div class='row'>
+                                    <div class='file-field input-field col s6'>
+                                       <div class='btn black-btn'>
+                                           <span>Photo</span>
+                                           <input type="file" name='pic'  value="<?php echo $row['r_pic'];?>"></input>
+                                       </div>
+                                       <!--<div class='file-path-wrapper'>
+                                           <input class='file-path-validate' type="text">
+                                       </div>-->
+                                    </div>
+                                
+                                    <div class='file-field input-field col s6'>
+                                       <div class='btn black-btn'>
+                                           <span>Menu</span>
+                                           <input type="file" name='menu'  value="<?php echo $row['r_menu'];?>"></input>
+                                       </div>
+                                       <!--<div class='file-path-wrapper'>
+                                           <input class='file-path-validate' type="text">
+                                       </div>-->
+                                    </div>
+                                </div>
+                                
+                                <div class='col s12 l12 center'><input type='submit' id='update' name='update' value='edit' class="waves-effect waves-light btn z-depth-2 btn black-btn"></input></div>
+								</form>
+							</div>
 							</div>
 						</div>
-						<div class='col s12 l12 center'><button name='edit'  class="waves-effect waves-light btn z-depth-2 black-btn">Submit</button></div>
-						</form>
-						
-					</div>
-					
-                    <div id="delete" class="col s12">
+						<div id="delete" class="col s12">
 					<div class="col s12 m12 l10 offset-l1">
                             <div class="row">
                                 <form action="delete.php" name='edit-rst' method='post' id='add-rst' class="col s12">
@@ -354,28 +445,8 @@ try{
 						</div>
 						<div class='col s12 l12 center'><button name='delete' class="waves-effect waves-light btn z-depth-2 black-btn">Submit</button></div>
 						</form>
-						<?php    
-						if(isset($_POST['delete']))
-						{
-						echo '<script> var r= confirm("Are you sure you want to delete this restaurant?");
-									if(r){
-										window.location.href="delete.php";}
-										</script>';
-						}
-										?>
 					</div>
-                    
-                    
-                </div>
-            </div>
-           
-           
-            
-        </main>
-  
-      
-     
-        <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+			<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
         <script src="materialize/js/materialize.min.js"></script>
         <script src="js/jquery.waypoints.min.js"></script>
         <script src="js/typed.js"></script>
