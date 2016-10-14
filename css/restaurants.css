@@ -56,6 +56,38 @@ nav .btn{
     top:0px;
     overflow-y: scroll;
 }
+.filters {
+    padding : 0 15px !important;
+}
+.filters h4{
+    text-transform: uppercase;
+    font-size : 90%;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+.filters h5{
+    font-size : 80%;
+    border-top : 1px solid #000;
+    padding-top : 10px !important;
+    color : #ee301e;
+    text-transform: uppercase;
+}
+.filters ul li a{
+    font-size : 100%;
+    color : #000;
+    padding : 8px 0 !important;
+}
+.filters ul{
+    margin-top : 10px;
+}
+
+.filters h6 a{
+    font-size : 110%;
+    text-transform: uppercase;
+    color : #e3301e;
+    font-weight : 500;
+    letter-spacing: 2px;
+}
 /*-----END OF SIDEBAR-------------------*/
 /*-------------RESTAURANTS CARDS SECTION----------*/
 .restaurants{
