@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$link = mysqli_connect("localhost", "root", "","restro");
+$link = mysqli_connect("localhost", "guest", "123","restro");
 if (mysqli_connect_error()){
     die('Unable to connect to the database');
 }

@@ -3,7 +3,7 @@
 if ($_COOKIE['admin']!=1){
     header('Location:index.php');
 }
-//error_reporting(0);
+error_reporting(0);
 session_start();
 //$_SESSION["name"] = $_POST['name'];
    
@@ -178,26 +178,26 @@ try{
                     <form action="insert.php" name='add-rst' method='POST' id='add-rst' class="col s12">
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="name" type="text" name="name" class="validate">
+                                <input id="name" type="text" name="name" class="validate" required>
                                 <label for="name">Name of restaurant</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="address" type="text" name="address">
+                                <input id="address" type="text" name="address" required>
                                 <label for="address">Address</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class='input-field col s4'>
-                                <select id='type' name='type' class='material-select'>
+                                <select id='type' name='type' class='material-select' required>
                                     <option default>Choose a food diet</option>
                                     <option value="Veg">Veg</option>
                                     <option value="Non-Veg">Non-Veg</option>
                                 </select>
                             </div>
                             <div class="input-field col s4">
-                                <select id='cuisine' name='cuisine' class='material-select'>
+                                <select id='cuisine' name='cuisine' class='material-select' required>
                                     <option default>Choose a cuisine</option>
                                     <?php 
                                         $sql= $db->query('SELECT DISTINCT`r_cuisine` FROM `restaurant` '); 
@@ -208,19 +208,19 @@ try{
                                 </select>
                             </div>
                             <div class="input-field col s4">
-                                <input type='text' id='cost' name="cost">
+                                <input type='text' id='cost' name="cost" required>
                                 <label for="cost">Cost</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class='input-field col s4'>
-                                <input type='text' id='contact' name="contact">
+                                <input type='text' id='contact' name="contact" required>
                                 <label for="contact">Contact Number</label>
                             </div>
                             <div class="input-field col s4">
-                                <input id="open-time" name="open-time" type="time"> </div>
+                                <input id="open-time" name="open-time" type="time" required> </div>
                             <div class="input-field col s4">
-                                <input id="close-time" name="close-time" type="time"> </div>
+                                <input id="close-time" name="close-time" type="time" required> </div>
                         </div>
                         <div class='row'>
                             <div class='file-field input-field col s6'>
@@ -248,12 +248,12 @@ try{
         <div id="reviews" class="col s12">
             <div class='col s12 l10 offset-l1'>
                 <h5> REVIEWS </h5>
-                <form name='review-accept' method="post" id='review-accept'>
+                <form name='review-accept' method="post" id='review-accept' autocomplete="off">
                     <!-- repeat start here -->
                     <?php 
                         try {
                                 $flag = 0;
-                                $sql = $db->query('SELECT * FROM `user`, `admin` WHERE `app`=0 AND `user`.`u_id`= `admin`.`a_uid`');
+                                $sql = $db->query('SELECT * FROM `user`, `admin` WHERE `app`=0 AND `user`.`u_id`= `admin`.`u_id`');
                                 while($row = $sql->fetch()){
                                             $flag=1;
                                             echo "<div class='col s12 l12 card-panel z-depth-1 hoverable review-card'>";
@@ -271,6 +271,7 @@ try{
                                 } catch(PDOException $e){
                                         echo 'connection failed: '.$e->getMessage();
                                 }
+
 
 
                             ?>
@@ -293,7 +294,7 @@ try{
                                         $sql1 = $db->query('SELECT * FROM `admin` WHERE `ar_id`='.$cb.'');
                                         $restid = $row['a_restid'];
                                         $a_rev = $row['a_rev'];
-                                        $uid = $row['a_uid'];
+                                        $uid = $row['u_id'];
 
                                         $sql2 = $db->prepare('INSERT INTO `review` (rest_id, review, u_id) VALUES (:rest_id, :review, :u_id) ');
                                         $sql2->execute(array(':review'=>$a_rev, ':rest_id'=>$restid, ':u_id'=>$uid));
@@ -303,10 +304,12 @@ try{
                                 }
                                 $_POST[$cb]=0; 
                             }
+                             header('Location: admin.php');
                         }
                     }catch(PDOException $e){
                             echo 'connection failed: '.$e->getMessage();
                         }
+                        
                 ?>
             </div>
         </div>
@@ -314,7 +317,7 @@ try{
         <div id="suggestions" class="col s12">
             <div class='col s12 l10 offset-l1'>
                 <h5> SUGGESTIONS </h5>
-                <form name='suggestion-accept' method="post" id='suggestion-accept'>
+                <form name='suggestion-accept' method="post" id='suggestion-accept' autocomplete="off">
                     <!-- repeat start here -->
                     <?php 
                          try{
@@ -368,10 +371,12 @@ try{
                                 }
                                 $_POST[$cb]=0; 
                             }
+                            header('Location: admin.php');
                         }
                     }catch(PDOException $e){
                             echo 'connection failed: '.$e->getMessage();
                         }
+
                 ?>
             </div>
         </div>
@@ -405,7 +410,7 @@ try{
         <div id="delete" class="col s12">
             <div class="col s12 m12 l10 offset-l1">
                 <div class="row">
-                    <form action="delete.php" name='edit-rst' method='post' id='add-rst' class="col s12">
+                    <form action="" name='edit-rst' method='post' id='add-rst' class="col s12">
                         <div class="input-field col s4">
                             <select id='name' name='name' class='material-select'>
                                 <option default>Choose a restaurant to delete</option>
@@ -428,10 +433,10 @@ try{
             $_SESSION['r_name']=$_POST['name'];
             if(isset($_POST['delete']))
             {
-        /*	echo '<script> var r= confirm("Are you sure you want to delete this restaurant?");
+        	echo '<script> var r= confirm("Are you sure you want to delete this restaurant?");
                         if(r){
-                            window.location.href="delete.php";}
-                            </script>'; */
+                            window.location.href="delete.php?id='.$_POST['name'].'";}
+                            </script>'; 
             }
                             ?>
     </div>

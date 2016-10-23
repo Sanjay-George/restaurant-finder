@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 
-$link = mysqli_connect("localhost", "root", "","restro");
+$link = mysqli_connect("localhost", "guest", "123","restro");
 if (mysqli_connect_error()){
     die('Unable to connect to the database');
 }
@@ -29,7 +29,7 @@ if ($error == ""){
             $_SESSION["id"] = $id;
             setcookie("id", $id, time() + 60*60*24*15);
 
-            if ($row['u_email'] == "admin@restrofinder.com"){
+            if ($row['u_email'] == "admin@restro.com"){
                 //admin
                 $_SESSION["admin"] = 1;
                 setcookie("admin", 1, time() + 60*60*24*15); 

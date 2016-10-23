@@ -150,44 +150,8 @@ require('login.php');
                     <div class='col m12 restaurants-cards'>
                     
                     <?php 
-	/*				 function urlvarRecreate ($exclude=''){
-					 	$urlArray = array();
-					 	foreach ($_GET as $key => $value) {
-					 		if(!is_array($exclude)){
-					 			if($key != $exclude){
-					 				array_push($urlArray, $key.'='.urlencode($val));
-					 			}
-					 		}
-					 		else{
-					 				if(!in_array($key, $exclude)){
-					 					array_push($urlArray, $key.'='.urlencode($val));
-					 				}
-					 		}
-					 	}
-					 	return implode('&', $urlArray);
-					 }
-*/
 					 	try{
 							$flag=0;
-/*	-----------multiple filters-------
-							$vars = array('cuisine', 'type', 'search', `sort`);
-							$filter = array();
-							$binds = array();
-							$i=0;
-							$href = '<a href="restaurant.php';
-							foreach ($vars as $key => $value) {
-								if($_GET[$value]!=''){
-									$filter[]=$value."=:".$value;
-									if($i==0){
-										$href .='?'.$value.'='.$_GET[$value];
-									}
-									else{
-										$href.='&'.$value.'='.$_GET[$value];
-									}
-									$i++;
-								}
-							}
-*/
 							$sql = $db->query('SELECT * FROM `restaurant`');
 							if(isset($_GET['cuisine'])){
 								$cui=$_GET['cuisine'];
@@ -215,7 +179,7 @@ require('login.php');
 
 							if(isset($_POST['search-query'])){
 								$search= $_POST['search-query'];
-								$sql = $db->query('SELECT * FROM `restaurant` WHERE `r_type`="'.$search.'" OR `r_cuisine`="'.$search.'" OR `r_name`="'.$search.'"');
+								$sql = $db->query('SELECT * FROM `restaurant` WHERE `r_type` LIKE "'.$search.'%" OR `r_cuisine` LIKE "%'.$search.'%" OR `r_name` LIKE "%'.$search.'%" OR `r_name` LIKE "%'.$search.'%" ');
 							}
 
 							while($row = $sql->fetch()){

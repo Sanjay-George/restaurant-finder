@@ -120,10 +120,10 @@ require ('login.php');
                     <div class="row card">
                         <div class="col m12 heading">
                             <h1 class='center'>Restrofinder</h1>
-                            <h3 class='center'>Find restaurants that serve your fav food</h3>
+                            <h4 class='center'>Find restaurants that serve your fav food</h4>
                         </div>
                         <div class='col s12 m12 l12'>
-                            <form method='post' name='search' id='search' class="col s12">
+                            <form action="restaurant.php" method='post' name='search' id='search' class="col s12">
                                 <div class="col s12 m10 offset-m1 l8 offset-l2 valign-wrapper">
                                     <div class="input-field col s9 m10 l11 search-query">
                                         <input name='search-query' id="search" class='autotype' type="text"> </div>

@@ -1,8 +1,6 @@
 <?php
-$link = mysqli_connect("localhost", "root", "","restro");
-if (mysqli_connect_error()){
-    die('Unable to connect to the database');
-}
+
+require('config.php');
 
 // check if logged in 
 if (array_key_exists("id",$_COOKIE)){
