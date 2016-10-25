@@ -9,7 +9,7 @@
 /*    outline : 1px solid red;*/
 }
 body{
-    font-size: 20px;
+    font-size: 18px;
 }
 
 header{
@@ -88,9 +88,17 @@ header .heading h3{
     font-size: 160%;
 }
 .search-query input{
-    font-size : 160%;
+    font-size : 170%;
     color : #7c7c7c;
 }
 .view-all-btn{
     margin: 70px 0 0px 0;
+}
+header h4{
+    font-weight: 300;
+    font-size : 180%;
+}
+header h1{
+/*    font-weight: 300;*/
+    font-size : 300%;
 }

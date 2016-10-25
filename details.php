@@ -118,7 +118,7 @@ if (!$_GET){
 	</div>
 	
 	<!-- START WORKING FROM HERE --> 
-	<main>
+	<header>
 		
 	<?php
 	// for restaurant details
@@ -181,13 +181,14 @@ if (!$_GET){
 			   	
 				?>
 			</div>
-		</div>
-	  
-
-		<div class='container'>
-		   <div class='col s12 center'>
-			   <a href="#menu-pop" name='menu-btn' class="waves-effect waves-light btn modal-trigger z-depth-1 menu-btn">View Menu</a>
-		   </div>
+        </div>
+		 
+	</header>
+	
+	<main>
+	    
+	    <div class='left-container'>
+		   
 			
 			<!-- HIDE ADD REVIEW SECTION IF NOT LOGGED IN -->
 			<div class='row add-reviews'>
@@ -302,9 +303,18 @@ if (!$_GET){
 
 			</div>
 		</div>
-		 
+    
+        <div class='right-container'>
+            <div class='col s12 center'>
+			   <a href="#menu-pop" name='menu-btn' class="waves-effect waves-light btn modal-trigger z-depth-1 menu-btn">View Menu</a>
+		   </div>
+		   <div class='col s12 center'>
+			   <a href='#!' name='menu-btn' class="waves-effect waves-light btn modal-trigger z-depth-1 menu-btn">Add Reservation</a>
+		   </div>
+           
+        </div>
+	    
 	</main>
-	
 	
 	<script src="materialize/js/materialize.min.js"></script>
 	<script src="js/jquery.waypoints.min.js"></script>

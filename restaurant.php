@@ -202,11 +202,15 @@ require('login.php');
 								echo '<span id="rest-rating" class="rating-value">'.$row['r_rat_avg'].'</span>';
 								echo '<span class="caption">/5</span>';
 								echo '</div>';
+								echo '</div>';   
 								echo '</div>';
-								echo '</div>';
+                                echo "<div class='col m12 rest-info'>
+                                    <div class='col l12'><i class='material-icons'>location_on</i>".$row['r_add']."</div>
+                                    <div class='col l12'><i class='material-icons'>stay_current_portrait</i>".$row['r_contact']."</div>
+                                </div>";
 								echo '<div class="col m12 center">';
 								//echo '<button class="waves-effect waves-light btn z-depth-2 black" >View</button>';
-								echo '<a href=details.php?id='.$row['r_id'].' class="waves-effect waves-light btn z-depth-2 black">View</a>';
+								echo '<a href=details.php?id='.$row['r_id'].' class="waves-effect waves-light btn z-depth-1 hoverable black">View</a>';
 								echo '</div>';
 								echo '</div>';
 								echo '</div>';

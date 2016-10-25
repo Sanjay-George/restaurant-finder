@@ -3,8 +3,8 @@
 	ob_start();
 	session_start();
  	$dbhost='localhost';
- 	$dbuser='guest';
- 	$dbpass='123';
+ 	$dbuser='root';
+ 	$dbpass='';
  	$dbname='restro';
  
  	try {

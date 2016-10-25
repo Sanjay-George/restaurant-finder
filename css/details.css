@@ -4,19 +4,25 @@
 .black-btn{
     background-color : rgba(0, 0, 0, 0.9) !important;
 }
-.menu-btn{
-    background-color : transparent !important;
-    border : 1px solid #e3301e;
-    color : #e3301e;
-}
+
 
 *{
 /*    outline : 1px solid red;*/
 }
 body{
-    font-size: 20px;
+    font-size: 18px;
     background-color : #f3f3f3;
     height:200vh;
+}
+.menu-btn{
+/*    background-color : transparent !important;*/
+/*    border : 1px solid #e3301e;*/
+    background-color : #e3301e !important;
+    color : #fff;
+    font-size : 85%;
+    text-transform: capitalize;
+    width : 300px;
+    margin-top : 20px;
 }
 .form-error {
     color : #e3301e;
@@ -118,6 +124,22 @@ nav .btn{
     
 }
 /*----------------END OF JUMBO SECTION------------*/
+/*---------------MAIN SECTION --------------------*/
+main{
+    display: flex;
+}
+main .left-container{
+    width : 70%;
+    margin-left : 15%;
+    margin-right : 4%;
+    
+}
+main .right-container{
+    width:30%;
+/*    border : 2px solid black;*/
+}
+
+/*---------------------------------------------------*/
 /*--------------REVIEW SECTION---------------------*/
 .add-reviews{
     padding:20px;
@@ -153,7 +175,7 @@ nav .btn{
     padding-bottom: 5px;
 }
 .reviews{
-    margin-top : 70px ;
+    margin-top : 30px ;
 }
 .user-review{
     padding: 10px 20px !important;
