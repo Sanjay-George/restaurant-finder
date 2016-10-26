@@ -25,6 +25,9 @@ header{
     font-size : 80%;
     letter-spacing: 1px;
 }
+.btn{
+    font-size : 80%;
+}
 /*------------NAV BAR --------------------------*/
 nav{
     position: fixed;
@@ -33,9 +36,6 @@ nav{
     padding-left:20px;
     padding-right:40px;
     background-color: rgba(0, 0, 0, 0.67) !important;
-    padding-top : 10px;
-    padding-bottom : 10px;
-    height: auto !important;
 }
 
 nav .btn{
@@ -45,13 +45,23 @@ nav .btn{
 /*--------------END OF NAV BAR -----------------*/
 /*--------------LOGIN POPUP-----------------------*/
 .modal.open{
-    height : 510px !important;
+    height : 530px !important;
+}
+#login-pop .modal-content{
+    padding : 15px 24px 10px 24px !important;
 }
 #login{
     margin-top : 50px  !important;
 }
 .tabs .tab{
     background-color : #fafafa !important;
+}
+#login-pop form{
+    padding : 0 10% !important;
+}
+
+#login-pop form .row{
+    margin-bottom : 10px !important;
 }
 
 /*--------------END OF LOGIN POPUP------------------*/
@@ -78,8 +88,9 @@ header button{
     margin-top:20px;
 }
 header .heading{
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
+/*
 header .heading h3{
     text-transform: uppercase;
     letter-spacing:1px;
@@ -87,18 +98,20 @@ header .heading h3{
     font-weight: 300;
     font-size: 160%;
 }
+*/
 .search-query input{
-    font-size : 170%;
+    font-size : 150%;
     color : #7c7c7c;
 }
 .view-all-btn{
-    margin: 70px 0 0px 0;
+    margin: 30px 0 0px 0;
+    font-size : 80%;
 }
 header h4{
     font-weight: 300;
-    font-size : 180%;
+    font-size : 150%;
 }
 header h1{
 /*    font-weight: 300;*/
-    font-size : 300%;
+    font-size : 250%;
 }

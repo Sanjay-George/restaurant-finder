@@ -100,6 +100,12 @@ require('login.php');
                                         <label for="password">Password</label>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="cnf-password" type="password" name="cnf-password" class="validate">
+                                        <label for="cnf-password">Confirm Password</label>
+                                    </div>
+                                </div>
                                 <input type="hidden" name='login' value='0'>
                                 <div class='col s12 l12 center'>
                                     <button name='submit' id='submit signup' class=" submit waves-effect waves-light btn z-depth-2 black-btn">Register</button>
@@ -122,14 +128,14 @@ require('login.php');
                         <h4>Filters</h4>
                         <h5>Veg / Non-Veg </h5>
                         <ul>
-                            <li><a href="restaurant.php?type=<?php $value='veg'; echo $value ?>"><font size="3">Vegetarian</font></a></li>
-                            <li><a href="restaurant.php?type=<?php $value='nveg'; echo $value ?>"><font size="3">Non-Vegetarian</font></a></li>
+                            <li><a href="restaurant.php?type=<?php $value='veg'; echo $value ?>"><font size="2">Vegetarian</font></a></li>
+                            <li><a href="restaurant.php?type=<?php $value='nveg'; echo $value ?>"><font size="2">Non-Vegetarian</font></a></li>
                         </ul>
                         <h5>Sort by</h5>
                         <ul>
-                            <li><a href="restaurant.php?sort=<?php $value='ca'; echo $value ?>"><font size="3">Cost - Low to high</font></a></li>
-                            <li><a href="restaurant.php?sort=<?php $value='cd'; echo $value ?>"><font size="3">Cost - High to low</font></a></li>
-                            <li><a href="restaurant.php?sort=<?php $value='rating'; echo $value ?>"><font size="3">Rating - High to low</font></a></li>
+                            <li><a href="restaurant.php?sort=<?php $value='ca'; echo $value ?>"><font size="2">Cost - Low to high</font></a></li>
+                            <li><a href="restaurant.php?sort=<?php $value='cd'; echo $value ?>"><font size="2">Cost - High to low</font></a></li>
+                            <li><a href="restaurant.php?sort=<?php $value='rating'; echo $value ?>"><font size="2">Rating - High to low</font></a></li>
                         </ul>
                         <h5>Cuisines</h5>
                         <ul>
@@ -137,7 +143,7 @@ require('login.php');
                                 $sql= $db->query('SELECT DISTINCT`r_cuisine` FROM `restaurant` '); 
                                 while($row=$sql->fetch()){
                                     $value = $row['r_cuisine'];
-                                    echo '<li><a href="restaurant.php?cuisine='.$value.'"><font size="3">'.$value.'</font></li>';
+                                    echo '<li><a href="restaurant.php?cuisine='.$value.'"><font size="2">'.$value.'</font></li>';
                                 }
                             ?>
                         </ul>
@@ -194,10 +200,10 @@ require('login.php');
 								//echo $row['r_pic'];
 								echo '</div>';
 								echo '<div class="col m12 valign-wrapper add-margin">';
-								echo '<div class="col l10 rest-name">';
+								echo '<div class="col l9 rest-name">';
 								echo '<h6><a href=details.php?id='.$row['r_id'].'>'.$row['r_name'].'</a></h6>';
 								echo '</div>';
-								echo '<div class="col l2 rest-rating ">';
+								echo '<div class="col l3 rest-rating ">';
 								echo '<div class="rating-badge good-rating  center z-depth-1">';
 								echo '<span id="rest-rating" class="rating-value">'.$row['r_rat_avg'].'</span>';
 								echo '<span class="caption">/5</span>';
@@ -246,12 +252,25 @@ require('login.php');
                 $('ul.tabs').tabs();
                 $('.modal-trigger').leanModal();
                 
+//                $('.rating-badge').removeClass('good-rating');
+                
+                // FOR RATING BADGE COLORS
+                
+//                console.log(typeof($('.restaurants-cards')));
+                
+                
+//                console.log(parseFloat($('.rating-value').text()));
+//                if (parseFloat($('.rating-value').text()) < 4){
+//                    $('.rating-badge').removeClass('good-rating');
+//                }
+                    
+                    
                 // FOR PAGINATION
                 var cardNum = $('.restaurants-cards .card-holder').length;
                 var pNum = Math.ceil(cardNum / 9);
 //                alert(pNum);
                 for (var i=0; i<pNum; i++){
-                    $( "<li class='page-number waves-effect'><a>"+(i+1)+"</a></li>" ).insertBefore( ".pagination .right-arrow" );
+                    $( "<li class='page-number waves-effect'>"+(i+1)+"</li>" ).insertBefore( ".pagination .right-arrow" );
                 }
                 $('.pagination li:nth-child(2)').addClass('active');
                 if (pNum == 1)

@@ -14,6 +14,10 @@ body{
     background-color : #f3f3f3;
     height:200vh;
 }
+
+.btn{
+    font-size : 80%;
+}
 .menu-btn{
 /*    background-color : transparent !important;*/
 /*    border : 1px solid #e3301e;*/
@@ -52,13 +56,23 @@ nav .btn{
 /*--------------END OF NAV BAR -----------------*/
 /*--------------LOGIN POPUP-----------------------*/
 .modal.open{
-    height : 500px !important;
+    height : 530px !important;
+}
+#login-pop .modal-content{
+    padding : 15px 24px 10px 24px !important;
 }
 #login{
     margin-top : 50px  !important;
 }
 .tabs .tab{
     background-color : #fafafa !important;
+}
+#login-pop form{
+    padding : 0 10% !important;
+}
+
+#login-pop form .row{
+    margin-bottom : 10px !important;
 }
 
 /*--------------END OF LOGIN POPUP------------------*/
@@ -72,7 +86,7 @@ nav .btn{
 /*---------------------------------------------------*/
 /*--------------JUMBO PARALLAX--------------------*/
 .parallax-container{
-    height: 600px; 
+    height: 500px; 
     padding:0 !important;
 }
 .parallax{
@@ -91,21 +105,21 @@ nav .btn{
     padding-left:50px;
     width:100%;
     background : linear-gradient(rgba(0, 0, 0, 0) ,rgba(0, 0, 0, 0.38) 20%, rgba(0, 0, 0, 0.88) 50%);
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     padding-top: 50px;
 /*    display: flex;*/
 }
 .text h2{
     color:#fff;
     font-weight: 200;
-    font-size : 280%;
+    font-size : 240%;
     text-transform: capitalize;
 }
 .text h5{
-    font-size : 90%;
+    font-size : 80%;
 }
 .rating-disp{
-    font-size : 140%;
+    font-size : 130%;
     font-weight: 300;
     border : 1px solid #fff;
     border-radius: 3px;
@@ -117,6 +131,7 @@ nav .btn{
 }
 .text i{
     margin-right:10px;
+    font-size : 110%;
 }
 .text .info-set-2{
     padding-top : 50px;
@@ -129,14 +144,14 @@ main{
     display: flex;
 }
 main .left-container{
-    width : 70%;
-    margin-left : 15%;
-    margin-right : 4%;
+    width : 65%;
+    margin-left : 17%;
+    margin-right : 3%;
     
 }
 main .right-container{
-    width:30%;
-/*    border : 2px solid black;*/
+    width:35%;
+    border-left : 1px solid #c3c3c3;
 }
 
 /*---------------------------------------------------*/
@@ -146,6 +161,7 @@ main .right-container{
     padding-bottom: 30px;
     background-color:transparent;
 }
+
 .star-row{
     margin-top : 30px;
 }
@@ -167,7 +183,7 @@ main .right-container{
     color: #e3301e;
 }
 .reviews h3, .add-reviews h3{
-    font-size : 110%;
+    font-size : 95%;
     text-transform: uppercase;
     letter-spacing: 2px;
     word-spacing: 4px;

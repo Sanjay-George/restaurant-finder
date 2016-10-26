@@ -103,6 +103,12 @@ if (!$_GET){
 								<label for="password">Password</label>
 							</div>
 						</div>
+				        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="cnf-password" type="password" name="cnf-password" class="validate">
+                                <label for="cnf-password">Confirm Password</label>
+                            </div>
+                        </div>
 						<input type="hidden" name='login' value='0'>
 						<div class='col s12 l12 center'>
 							<button name='submit' id='submit signup' class=" submit waves-effect waves-light btn z-depth-2 black-btn">Register</button>
