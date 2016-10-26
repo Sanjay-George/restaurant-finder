@@ -21,12 +21,11 @@ if ($_POST){
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="materialize/css/materialize.min.css">
+	<link rel="stylesheet" href="css/datetimepicker.css">
 	<link rel='stylesheet' href="css/materialize_red_black_theme.css">
 	<link rel="stylesheet" href="css/details.css"> 
-	<link rel="stylesheet" href="css/bootstrap-material-datetimepicker.css"> 
 	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
-	<script type="text/javascript" src="js/moment.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap-material-datetimepicker.js"></script>
+	
 </head>
 
 <body>
@@ -234,7 +233,8 @@ if ($_POST){
 	</main>
 	
 	<script src="materialize/js/materialize.min.js"></script>
-	<script src="js/jquery.waypoints.min.js"></script>
+	<script type="text/javascript" src="js/moment.min.js"></script>
+	<script type="text/javascript" src="js/datetimepicker.js"></script>
 	<script src="js/typed.js"></script>
 	<script>
 
