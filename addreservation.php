@@ -7,7 +7,13 @@ require('login.php');
 if (!$_GET){
 	header('location:index.php');
 }
+
+if ($_POST){
+    print_r($_POST);
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +23,10 @@ if (!$_GET){
 	<link rel="stylesheet" href="materialize/css/materialize.min.css">
 	<link rel='stylesheet' href="css/materialize_red_black_theme.css">
 	<link rel="stylesheet" href="css/details.css"> 
+	<link rel="stylesheet" href="css/bootstrap-material-datetimepicker.css"> 
 	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="js/moment.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-material-datetimepicker.js"></script>
 </head>
 
 <body>
@@ -171,154 +180,56 @@ if (!$_GET){
 
 				</div>   
 			</div>
-		</div>
-		
-		<!-- MENU POPUP STARTS HERE -->
-		<div id='menu-pop' class='modal menu-pop'>
-			<div class='modal-content'>
-			   <?php 
-				try {
-				   	$sql=$db->query('SELECT * FROM `restaurant` WHERE `r_id`='.$_GET['id'].'');
-				   	$row=$sql->fetch();
-				   	echo "<img src='".$row['r_menu']."'>"; 
-			 	} catch(PDOException $e){
-			 		echo 'connection failed: '.$e->getMessage();
-				 	}
-			   	
-				?>
-			</div>
-        </div>
-		 
+		</div> 
 	</header>
 	
 	<main>
 	    
-	    <div class='left-container'>
+	    <div class='container'>
 		   
-			
-			<!-- HIDE ADD REVIEW SECTION IF NOT LOGGED IN -->
-			<div class='row add-reviews'>
-				<h3>Add review</h3>
-				
-				<div class='col s12 m12 l10 offset-l1'>
-				<form method="post" name='new-review' id='new-review' class="col s12" novalidate>
-				<!-- STARS SHIT HERE -->
-				<!-- READ CAREFULLY : WHEN CLICKING ON A STAR, THE CORRESPONDING VALUE IS STORED IN THE HIDDEN INPUT ELEMENT WITH NAME RATING...SO WHEN FORM IS SUBMITTED, $_POST['rating'] WILL GIVE THE RATING -->
-				<div class='row'>
-				  <div class='col s12'>
-						<input name='rating' id='rating' type="hidden" value='1'>
-						<div class='star-row'>
-							<span><p>Add your rating :</p></span>                                   
-							<span class='star' data-value='1'><i class='material-icons'>star</i></span>
-							<span class='star' data-value='2'><i class='material-icons'>star</i></span>
-							<span class='star' data-value='3'><i class='material-icons'>star</i></span>
-							<span class='star' data-value='4'><i class='material-icons'>star</i></span>
-							<span class='star' data-value='5'><i class='material-icons'>star</i></span>
-						</div>
-				  </div>
-				</div>
+			<div class='row add-reservation add-reviews'>
+                <h3>Enter reservation details</h3> 
+                <div class='col s12 l10 offset-l1'>
+                    <form method="post" name="reservation" id='reservation'>
+                        <div class='row valign-wrapper'>
+                            <div class='col s4'>
+                                <clabel>Select Date</clabel>
+                            </div>
+                            <div class='col s8'>
+                                <div class="form-control-wrapper">
+                                    <input name='date' type="text" id="date" class="form-control floating-label" placeholder="Date" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='row valign-wrapper'>
+                            <div class='col s4'>
+                                <clabel>Select Time</clabel>
+                            </div>
+                            <div class='col s8'>
+                                <div class="form-control-wrapper">
+                                    <input name="time" type="text" id="time" class="form-control floating-label" placeholder="Time" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='row valign-wrapper'>
+                            <div class='col s4'>
+                                <clabel>Number of people</clabel>
+                            </div>
+                            <div class='col s8'>
+                                <div class="form-control-wrapper">
+                                    <input name="people" type="number" id="people"  placeholder="Number of people" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col s12 l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 red">Make Reservation</button></div>
 
-				 <div class="row">
-					<div class="input-field col s12">
-					  <textarea id='review' name='review' class='materialize-textarea'></textarea>
-					  <label for="review">Enter your review here</label>
-					</div>
-				  </div>
-				  <div class="row">
-					<div class="input-field col s12">
-					  <input id="suggestion" type="text" name='suggestion'>
-					  <label for="suggestion">Other suggestions</label>
-					</div>
-				  </div>
-
-
-				  <div class='col s12 l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Submit</button></div>
-
-
-				</form>
-				</div>
+                    </form>
+                </div>   
 			</div>
 			
-			<?php 
-				$id = $_GET['id'];
-				try {
-					   //-------------------STORE RATING--------------
-					if(isset($_POST['rating'])){
-						$new_sum = $row['r_rat_sum'] + $_POST['rating'];
-						$new_count = $row['r_rat_no'] + 1;
-						$new_avg = round($new_sum/$new_count);
-						$sql = $db->prepare('UPDATE `restaurant` SET `r_rat_no`=:r_rat_no, `r_rat_avg`=:r_rat_avg, `r_rat_sum`=:r_rat_sum WHERE `r_id`="'.$id.'"');
-						$sql->execute(array(':r_rat_avg'=>$new_avg, ':r_rat_sum'=>$new_sum, ':r_rat_no'=>$new_count));	
-						unset($_POST['rating']);
-					}
-
-					//---------------STORE REVIEW------------------
-					if(isset($_POST['review'])){
-						$rev=$_POST['review'];
-						$uid = $_SESSION['id'];
-						$sql =  $db->prepare('INSERT INTO `admin` (a_rev, a_restid, u_id) VALUES (:a_rev, :a_restid, :a_uid)');
-						$sql->execute(array(':a_rev'=>$rev, ':a_restid'=>$id, ':a_uid'=>$uid));
-					}
-					//--------------STORE SUGGESTION---------------
-					if(isset($_POST['suggestion'])){
-						$sug=$_POST['suggestion'];
-						$uid = $_SESSION['id'];
-						$sql=$db->prepare('INSERT INTO `suggestion` (u_id,suggestion) VALUES (:u_id, :suggestion)');
-						$sql->execute(array(':u_id'=>$uid, 'suggestion'=>$sug));
-					}
-			 	} catch(PDOException $e){
-			 		echo 'connection failed: '.$e->getMessage();
-				 	}
-				
-			?>
-			<!-- CODE FOR HIDING ADD REVIEW SECTION -->
-			<?php
-
-				if (!array_key_exists("id",$_SESSION)){
-					
-			?>
-			<script type="text/javascript">
-			   $('.add-reviews').empty();
-			   $('.add-reviews').append("<h3>Add review</h3>");
-			   $('.add-reviews').append("<div class='col s12 center'><p class='muted-text'>Please login or register to write a review </p></div>");
-			</script>
-			<?php
-				}
-
-			?>
-			
-			
-			<!-- ALL REVIEWS SECTION -->  
-			<div class='row reviews'>
-			   <h3>User reviews</h3>
-
-			   <!-- repeat the following markup for reviews -->
-			   <?php 
-			   	$sql =  $db->query("SELECT * FROM `review`, `user` WHERE `rest_id`=".$id." AND `user`.`u_id`=`review`.`u_id`");
-			   	while($row = $sql->fetch()){
-			   		echo "<div class='col s12 user-review card hoverable'>";
-						echo "<div class='col s12 valign-wrapper'>";
-						echo "<span><i class='material-icons'>perm_identity</i></span>";
-						echo "<span id='user-name'>".$row['u_name']."</span>";
-						echo "</div>  ";
-						echo "<div id='review-content' class='col s12'>".$row['review']."</div>  ";
-						echo "</div>";
-					} 
-	  		 	?>
-			   <!-- ........repeat till here..............  -->
-
-			</div>
 		</div>
     
-        <div class='right-container'>
-            <div class='col s12 center'>
-			   <a href="#menu-pop" name='menu-btn' class="waves-effect waves-light btn modal-trigger z-depth-1 menu-btn">View Menu</a>
-		   </div>
-		   <div class='col s12 center'>
-			   <a <?php echo"href='addreservation.php?id=".$_GET['id']."'" ?> name='menu-btn' class="waves-effect waves-light btn modal-trigger z-depth-1 menu-btn">Add Reservation</a>
-		   </div>
-           
-        </div>
+
 	    
 	</main>
 	
@@ -326,6 +237,37 @@ if (!$_GET){
 	<script src="js/jquery.waypoints.min.js"></script>
 	<script src="js/typed.js"></script>
 	<script>
+
+        
+        // WHEN DOC READY
+		$(document).ready(function () {
+			// FOR SELECTING TABS
+			$('ul.tabs').tabs();
+			$('.modal-trigger').leanModal();
+			$('.parallax').parallax();
+			$('#review').val();
+			$('#review').trigger('autoresize');
+            
+            // TIME OR DATE PICKER
+			$('#date').bootstrapMaterialDatePicker
+			({
+				time: false,
+				clearButton: false,
+                format : 'DD/MM/YYYY'
+			});
+            $('#date').bootstrapMaterialDatePicker('setDate', moment());
+            $('#date').bootstrapMaterialDatePicker('setMinDate', moment());
+			$('#time').bootstrapMaterialDatePicker
+			({
+				date: false,
+				shortTime: true,
+				format: 'HH:mm'
+			});
+            
+            $.material.init()
+            
+		});
+        
 		 // LOGIN REQUEST AJAX
 		$('#login button').click(function (e) {
 			e.preventDefault();
@@ -373,15 +315,7 @@ if (!$_GET){
 		});
 
 		
-		// WHEN DOC READY
-		$(document).ready(function () {
-			// FOR SELECTING TABS
-			$('ul.tabs').tabs();
-			$('.modal-trigger').leanModal();
-			$('.parallax').parallax();
-			$('#review').val();
-			$('#review').trigger('autoresize');
-		});
+		
 		// STARS PART
 		// hovering 
 		$('.star-row').find('.star').hover(function () {

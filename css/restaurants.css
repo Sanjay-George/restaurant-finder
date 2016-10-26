@@ -108,12 +108,12 @@ nav .btn{
 
 .restaurants h4{
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     font-weight: 400;
 /*    color : #e3301e;*/
     border-bottom : 2px solid black;
     padding-bottom: 10px;
-    font-size : 130%;
+    font-size : 110%;
 }
 .restaurants-cards{
     padding-top: 30px !important;
@@ -167,6 +167,7 @@ nav .btn{
 }
 .rest-info {
     font-size : 80%;
+    word-spacing : 2px;
     margin: 5px 0;
    
 }
@@ -175,8 +176,8 @@ nav .btn{
     margin: 5px 0;
     margin-right : 10px;
 }
-.page-number{
-    color : #fff;
+.page-number {
+    cursor: default;
 }
 /*------------for the ratings--------------*/
 .rating-badge{

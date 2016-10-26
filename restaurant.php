@@ -270,7 +270,7 @@ require('login.php');
                 var pNum = Math.ceil(cardNum / 9);
 //                alert(pNum);
                 for (var i=0; i<pNum; i++){
-                    $( "<li class='page-number waves-effect'>"+(i+1)+"</li>" ).insertBefore( ".pagination .right-arrow" );
+                    $( "<li class='page-number waves-effect'><a>"+(i+1)+"</a></li>" ).insertBefore( ".pagination .right-arrow" );
                 }
                 $('.pagination li:nth-child(2)').addClass('active');
                 if (pNum == 1)
