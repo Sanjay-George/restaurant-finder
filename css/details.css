@@ -57,6 +57,7 @@ nav .btn{
 /*--------------LOGIN POPUP-----------------------*/
 .modal.open{
     height : 530px !important;
+    overflow-y: hidden;
 }
 #login-pop .modal-content{
     padding : 15px 24px 10px 24px !important;
@@ -229,5 +230,10 @@ main .right-container{
 .bad-rating{
     background-color : #b31e1e !important;
 }
-
-
+/*------------RESERVATIONS SECTION---------------*/
+.add-reservation h3{
+    margin-bottom : 30px;
+}
+.add-reservation clabel{
+    font-size : 90%;
+}

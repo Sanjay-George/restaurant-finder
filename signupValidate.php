@@ -7,8 +7,16 @@ if (mysqli_connect_error()){
 }
 $error=""; 
 
+//print_r($_POST);
+
+if ($_POST['confirm'] !== $_POST['password']){
+    $error = 'Passwords do not match';
+}
 if (strlen($_POST['password'])<8){
     $error = 'Password must have atleast 8 characters';
+}
+if (!$_POST['confirm']){
+    $error = 'Please confirm the password';
 }
 if (!$_POST['password']){
     $error = 'Please enter password';

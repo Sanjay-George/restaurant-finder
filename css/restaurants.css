@@ -39,6 +39,7 @@ nav .btn{
 /*--------------LOGIN POPUP-----------------------*/
 .modal.open{
     height : 530px !important;
+    overflow-y: hidden;
 }
 #login-pop .modal-content{
     padding : 15px 24px 10px 24px !important;

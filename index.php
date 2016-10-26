@@ -180,6 +180,7 @@ require ('login.php');
                         , data: {
                             email: $('#signup #email').val()
                             , password: $("#signup #password").val()
+                            , confirm: $("#signup #cnf-password").val()
                             , username: $("#signup #username").val()
                         }
                     }).done(function (msg) {

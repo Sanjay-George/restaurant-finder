@@ -192,7 +192,7 @@ if ($_POST){
                     <form method="post" name="reservation" id='reservation'>
                         <div class='row valign-wrapper'>
                             <div class='col s4'>
-                                <clabel>Select Date</clabel>
+                                <clabel>Select Date :</clabel>
                             </div>
                             <div class='col s8'>
                                 <div class="form-control-wrapper">
@@ -202,7 +202,7 @@ if ($_POST){
                         </div>
                         <div class='row valign-wrapper'>
                             <div class='col s4'>
-                                <clabel>Select Time</clabel>
+                                <clabel>Select Time :</clabel>
                             </div>
                             <div class='col s8'>
                                 <div class="form-control-wrapper">
@@ -212,7 +212,7 @@ if ($_POST){
                         </div>
                         <div class='row valign-wrapper'>
                             <div class='col s4'>
-                                <clabel>Number of people</clabel>
+                                <clabel>Number of people :</clabel>
                             </div>
                             <div class='col s8'>
                                 <div class="form-control-wrapper">
@@ -291,28 +291,29 @@ if ($_POST){
 			});
 		});
 		// SIGNUP REQUEST AJAX
-		$('#signup button').click(function (e) {
-			e.preventDefault();
-			// ajax to validate
-			$.ajax({
-				method: "POST"
-				, url: "signupValidate.php"
-				, data: {
-					email: $('#signup #email').val()
-					, password: $("#signup #password").val()
-					, username: $("#signup #username").val()
-				}
-			}).done(function (msg) {
-				if (msg != 'success') {
-					$('.form-error-2').text(msg);
-				}
-				else {
-					//refresh the page
-					$('.form-error-2').text("Registered successfully");
-					location.reload();
-				}
-			});
-		});
+        $('#signup button').click(function (e) {
+            e.preventDefault();
+            // ajax to validate
+            $.ajax({
+                method: "POST"
+                , url: "signupValidate.php"
+                , data: {
+                    email: $('#signup #email').val()
+                    , password: $("#signup #password").val()
+                    , confirm: $("#signup #cnf-password").val()
+                    , username: $("#signup #username").val()
+                }
+            }).done(function (msg) {
+                if (msg != 'success') {
+                    $('.form-error-2').text(msg);
+                }
+                else {
+                    //refresh the page
+                    $('.form-error-2').text("Registered successfully");
+                    location.reload();
+                }
+            });
+        });
 
 		
 		

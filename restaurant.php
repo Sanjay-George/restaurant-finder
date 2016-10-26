@@ -223,7 +223,7 @@ require('login.php');
 								
 
 							}
-								if($flag==0) { echo "<h3><strong>0 Results</strong></h3>"; }
+								if($flag==0) { echo "<h5>0 Results</h5>"; }
 						} catch(PDOException $e){
 							echo $e->getMessage();
 						}
@@ -370,6 +370,7 @@ require('login.php');
                     , data: {
                         email: $('#signup #email').val()
                         , password: $("#signup #password").val()
+                        , confirm: $("#signup #cnf-password").val()
                         , username: $("#signup #username").val()
                     }
                 }).done(function (msg) {
