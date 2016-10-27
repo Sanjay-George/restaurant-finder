@@ -237,3 +237,15 @@ main .right-container{
 .add-reservation clabel{
     font-size : 90%;
 }
+/*
+.map{
+    margin-top : 50px;
+}
+*/
+.map-container{
+    padding-top : 30px !important;
+    height : auto;
+}
+.map-frame{
+    width:400px;
+}

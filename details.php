@@ -318,6 +318,21 @@ if (!$_GET){
 			   <a <?php echo"href='addreservation.php?id=".$_GET['id']."'" ?> name='menu-btn' class="waves-effect waves-light btn modal-trigger z-depth-1 menu-btn">Add Reservation</a>
 		   </div>
            
+            <div class='col s12'>
+               <div class='col s12 map-container center'>
+                   <?php
+                   
+                   $addrquery = "SELECT * FROM `maps` WHERE r_id =".$_GET['id']."";
+                   $result = mysqli_query($link, $addrquery);
+                   $map = mysqli_fetch_array($result);
+                    echo "<iframe class='map-frame' src='".$map['address']."' width='400' height='450' frameborder='0' style='border:1'></iframe>";
+                
+                   
+                   
+            ?>
+                           
+               </div>
+            </div>
         </div>
 	    
 	</main>

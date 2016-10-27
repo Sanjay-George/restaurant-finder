@@ -2,6 +2,8 @@
 
 require('config.php');
 
+$link = mysqli_connect("localhost", "root", "","restro");
+
 // check if logged in 
 if (array_key_exists("id",$_COOKIE)){
     $_SESSION['id'] = $_COOKIE['id'];
